@@ -1,0 +1,23 @@
+{
+  "name": "404-contest",
+  "version": "1.0.0",
+  "description": "Link to the contest: [404 Page Contest](https://becodeorg.github.io/emotion-design-404-contest/ \"404 Page Contest\").",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch assets/scss -o assets/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ldolne/404-contest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ldolne/404-contest/issues"
+  },
+  "homepage": "https://github.com/ldolne/404-contest#readme",
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  }
+}
