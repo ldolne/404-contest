@@ -81,7 +81,6 @@ const ball = {
 
     // Hit bottom wall - Lose
     if (this.y + this.radius >= canvas.height) {
-      console.log("Hello");
       showAllSquares();
       score.value = 0;
     }
