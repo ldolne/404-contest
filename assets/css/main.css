@@ -10,11 +10,27 @@ header .boximg {
   background-size: cover;
   background-position: center; }
 
+.canvasbox {
+  background-image: url(../img/background.svg);
+  background-position: center; }
+
+.logo {
+  width: 100px;
+  min-width: 100px;
+  height: 600px;
+  background-image: url(../img/background.svg);
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px; }
+  .logo div {
+    height: 200px;
+    padding-top: 10px;
+    padding-left: 3px; }
+
 @media screen and (max-width: 899px) {
   .canvasbox {
     background-position: center; }
-    .canvasbox canvas {
-      display: none; }
   header {
     display: none; } }
 
@@ -29,13 +45,10 @@ header .boximg {
     .container .info1 {
       width: 0; }
     .container .canvasbox {
-      background-image: url(../img/background.svg);
       width: 360px;
       min-width: 360px;
       display: flex;
       justify-content: flex-end; }
-      .container .canvasbox canvas {
-        border-left: 10px solid white; }
     .container .info2 {
       width: 0; } }
 
@@ -57,13 +70,10 @@ header .boximg {
     .container .nl-info-L {
       background-image: ""; }
     .container .canvasbox {
-      background-image: url(../img/background.svg);
-      background-position: center;
       width: 360px;
       min-width: 360px;
       display: flex;
-      justify-content: flex-end;
-      border-left: 5px solid white; }
+      justify-content: flex-end; }
     .container .info2 {
       height: 600px;
       width: 250px; }
@@ -72,9 +82,4 @@ header .boximg {
     .container .nl-info-R {
       background-image: ""; }
     .container .en-info-R {
-      background-image: ""; }
-    .container .logo {
-      width: 100px;
-      height: 600px;
-      background-image: url(../img/background.svg);
-      background-position: center; } }
+      background-image: ""; } }
