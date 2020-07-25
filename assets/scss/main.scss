@@ -1,8 +1,8 @@
+
 body{
     min-height: 100vh;
     margin: 0;
     background-color: #1A2831;
-    
 }
 header{
     .boximg{
@@ -13,14 +13,110 @@ header{
         background-position: center;
     }
 }
-.container{
-    height: 600px;
-    background-image: url(../img/background.svg);
-    display: flex;
-    justify-content: center;
-    canvas{
-        border-left: 10px solid white;
-        border-right: 10px solid white;
+@media screen and (max-width: 899px){
+    .canvasbox{
+        background-position: center;
+        canvas{
+            display: none;
+            
+        }
     }
-
+    header{
+        display: none;
+    }
+    
 }
+
+@media screen and (max-width: 1379px) {
+    .container{
+        height: 600px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        
+        display: flex;
+        justify-content: center;
+        .info1{
+            width: 0;
+        }
+        .canvasbox{
+            background-image: url(../img/background.svg);
+            width: 360px;
+            min-width: 360px;
+            display: flex;
+            justify-content: flex-end;
+            canvas{
+                border-left: 10px solid white;
+                
+            }
+        
+        }
+        .info2{
+            width: 0;
+        }
+         
+    
+    }
+  }
+
+
+@media screen and (min-width: 1380px) {
+ 
+
+    .container{
+        height: 600px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        
+        display: flex;
+        justify-content: center;
+        .info1{
+            height: 600px;
+            width: 250px;
+        }
+        .fr-info-L{
+            background-image: url(../img/test404-LEFT-FR.svg);
+        }
+        .nl-info-L{
+            background-image: "";
+        }
+        .nl-info-L{
+            background-image: "";
+        }
+        .canvasbox{
+            background-image: url(../img/background.svg);
+            background-position: center;
+            width: 360px;
+            min-width: 360px;
+            display: flex;
+            justify-content: flex-end;
+            border-left: 5px solid white;
+            
+        
+        }
+        .info2{
+            height: 600px;
+            width: 250px;
+            
+        }
+        .fr-info-R{
+            background-image: url(../img/test404-RIGHT-FR.svg);
+        }
+        .nl-info-R{
+            background-image: "";
+        }
+        .en-info-R{
+            background-image: "";
+        }
+         
+        .logo{
+            width: 100px;
+            height: 600px;
+            background-image: url(../img/background.svg);
+            background-position: center;
+        }
+    }
+}
+
+
