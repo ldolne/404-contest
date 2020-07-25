@@ -12,7 +12,13 @@ console.log(message);
 
 const lettersCount = message.length;
 
-// Create ball props
+// Create coding zones objects
+const codingZone = {
+  x: canvas.width / 3,
+  y: canvas.height / 3
+}
+
+// Create ball object
 const ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
@@ -22,7 +28,7 @@ const ball = {
   dy: -4
 };
 
-// Create paddle props
+// Create paddle object
 const paddle = {
   x: canvas.width / 2 - 40,
   y: canvas.height - 20,
@@ -32,10 +38,19 @@ const paddle = {
   dx: 0
 };
 
-// Create letter props
+// Create letter object
 const letterInfo = {
   w: 25,
   h: 20,
+  padding: 10,
+  offsetX: 45,
+  offsetY: 60,
+  visible: true
+};
+
+const squareInfo = {
+  w: 25,
+  h: 25,
   padding: 10,
   offsetX: 45,
   offsetY: 60,
@@ -51,11 +66,26 @@ for (let i = 0; i < lettersCount; i++) {
   letters[i] = { x, y, ...letterInfo };
 }
 
+const squares = [];
+for (let i = 0; i < lettersCount; i++) {
+  const x = i * (squareInfo.w + squareInfo.padding) + squareInfo.offsetX;
+  const y = (squareInfo.h + squareInfo.padding) + squareInfo.offsetY;
+  squares[i] = { x, y, ...squareInfo };
+}
+
 // Draw ball on canvas
-function drawBall() {
+function drawBall(color) {
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
-  ctx.fillStyle = '#0095dd';
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawSquareBall() {
+  ctx.beginPath();
+  ctx.rect(ball.x, ball.y, ball.size * 1.5, ball.size * 1.5);
+  ctx.fillStyle = '#000000';
   ctx.fill();
   ctx.closePath();
 }
@@ -78,10 +108,22 @@ function drawScore() {
 // Draw letters on canvas
 function drawLetters() {
   letters.forEach((letter, i) => {
-      ctx.font = `${letterInfo.w}px serif`;
+      ctx.font = `${letterInfo.w}px Helvetica`;
       ctx.fillText(message[i], letter.x, letter.y);
       ctx.fillStyle = letter.visible ? '#0095dd' : 'transparent';
+      ctx.strokeStyle = "#FF0000";
       ctx.fill();
+    });
+}
+
+// Draw square on canvas
+function drawSquares() {
+  squares.forEach((square) => {
+      ctx.beginPath();
+      ctx.rect(square.x, square.y, square.w, square.h);
+      ctx.strokeStyle = square.visible ? '#0095dd' : 'transparent';
+      ctx.stroke();
+      ctx.closePath();
     });
 }
 
@@ -147,6 +189,17 @@ function moveBall() {
     showAllLetters();
     score = 0;
   }
+
+  // Change coding zone
+  if(ball.y < (codingZone.y * 2) && ball.y > codingZone.y)
+  {
+    drawBall('orange');
+  }
+
+  if(ball.y < (codingZone.y * 3) && ball.y > (codingZone.y * 2))
+  {
+    drawBall('green');
+  }
 }
 
 // Increase score
@@ -169,10 +222,19 @@ function draw() {
   // clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  drawBall();
+  if(ball.y < codingZone.y)
+  {
+    drawSquareBall();
+  }
+  else
+  {
+    drawBall();
+  }
+
   drawPaddle();
   drawScore();
   drawLetters();
+  drawSquares();
 }
 
 // Update canvas drawing and animation
