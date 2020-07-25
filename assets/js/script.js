@@ -28,9 +28,9 @@ const ball = {
 // Create paddle object
 const paddle = {
   x: canvas.width / 2 - 40,
-  y: canvas.height - 20,
+  y: canvas.height - 40,
   w: 80,
-  h: 10,
+  h: 30,
   speed: 8,
   dx: 0
 };
@@ -74,7 +74,6 @@ function drawSquareBall() {
 // Draw paddle on canvas
 function drawPaddle() {
   ctx.beginPath();
-  //ctx.ellipse(100, 100, 50, 75, 45 * Math.PI/180, 0, 2 * Math.PI);
   ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
   ctx.fillStyle = '#1A2831';
   ctx.fill();
@@ -83,6 +82,7 @@ function drawPaddle() {
 
 // Draw score on canvas
 function drawScore() {
+  ctx.fillStyle = '#1A2831';
   ctx.font = '20px Arial';
   ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
 }
@@ -90,9 +90,9 @@ function drawScore() {
 // Draw letters on canvas
 function drawLetters() {
   letters.forEach((letter, i) => {
-      ctx.strokeStyle = letter.visible ? 'white' : 'transparent';
+      ctx.strokeStyle = letter.visible ? '#1A2831' : 'transparent';
       ctx.strokeRect(letter.x, letter.y, letter.w, letter.h);
-      ctx.fillStyle = letter.visible ? '#0095dd' : 'transparent';
+      ctx.fillStyle = letter.visible ? '#1A2831' : 'transparent';
       ctx.font = "16px Helvetica";
       ctx.fillText(message[i], letter.x + 9, letter.y + (letter.y/3));
     });
@@ -257,9 +257,21 @@ function mouseUp(e) {
 }
 
 // Touch controller
-
 function touchStart(e) {
+  console.log("Hello");
+  isClickingDown = true;
+}
 
+function touchMove(e) {
+  if(isClickingDown) {
+    paddle.x = (e.touches[0].clientX - paddle.w);
+  }
+}
+
+function touchEnd(e) {
+  if (isClickingDown) {
+    isClickingDown = false;
+  }
 }
 
 // Keyboard and mouse  event handlers
@@ -269,3 +281,5 @@ document.getElementById("canvas").addEventListener('mousedown', mouseDown);
 document.getElementById("canvas").addEventListener('mousemove', mouseMove);
 document.getElementById("canvas").addEventListener('mouseup', mouseUp);
 document.getElementById("canvas").addEventListener('touchstart', touchStart);
+document.getElementById("canvas").addEventListener('touchmove', touchMove);
+document.getElementById("canvas").addEventListener('touchend', touchEnd);
