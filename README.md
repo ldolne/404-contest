@@ -14,4 +14,4 @@ Even though the contest was an individual one, we teamed up because we had the i
 ### Resources
 - We followed Traversy Media's tutorial to build the "Breakout" game and adapted it to fit our needs: [Breakout game](https://vanillawebprojects.com/projects/breakout-game/ "Breakout game")
 - Font "Mywriting" by [Peax Webdesign](http://www.peax-webdesign.com/ "Peax Webdesign"): [dafont.com](https://www.dafont.com/fr/mywriting.font "dafont.com")
-- Logos HTML, CSS and Javascript : [fontawesome.com](https://fontawesome.com "fontawesome.com")
+- Logos HTML, CSS and JavaScript: [fontawesome.com](https://fontawesome.com "fontawesome.com")
