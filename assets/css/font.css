@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'mywriting';
+    src: URL('../fonts/Mywriting.ttf') format('truetype');
+}
+h1{
+    font-family: "mywriting";
+    font-size: 2.5rem;
+    color: #29D0E2;
+}

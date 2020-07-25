@@ -26,6 +26,8 @@ header .boximg {
   width: 100%;
   color: white;
   text-align: center; }
+  .title404 h1 {
+    font-family: "mywriting"; }
 
 .canvasbox canvas {
   background-image: url(../img/background.svg);
@@ -75,11 +77,15 @@ header .boximg {
 .changeLanguage {
   width: 100%;
   display: flex;
-  list-style: none; }
+  list-style: none;
+  justify-content: center; }
   .changeLanguage li {
     margin-right: 5px; }
+    .changeLanguage li a {
+      text-decoration: none;
+      color: white; }
 
-@media screen and (max-width: 939px) {
+@media screen and (max-width: 960px) {
   .canvasbox {
     background-position: center; }
   header {
@@ -91,7 +97,7 @@ header .boximg {
   .info2 {
     display: none; } }
 
-@media screen and (min-width: 940px) {
+@media screen and (min-width: 961px) {
   .container .canvasbox {
     width: 360px;
     min-width: 360px;

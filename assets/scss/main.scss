@@ -30,6 +30,9 @@ header{
     width: 100%;
     color: white;
     text-align: center;
+    h1{
+        font-family: "mywriting";
+    }
 }
 .canvasbox{
     canvas{
@@ -87,14 +90,19 @@ header{
     width: 100%;
     display: flex;
     list-style: none;
+    justify-content: center;
     
     li{
         margin-right: 5px;
+        a{
+            text-decoration: none;
+            color: white;
+        }
     }
 }
 
 
-@media screen and (max-width: 939px){
+@media screen and (max-width: 960px){
     .canvasbox{
         background-position: center;
         
@@ -116,7 +124,7 @@ header{
 
 
 
-@media screen and (min-width: 940px) {
+@media screen and (min-width: 961px) {
  
 
     .container{
