@@ -1,6 +1,3 @@
-const rulesBtn = document.getElementById('rules-btn');
-const closeBtn = document.getElementById('close-btn');
-const rules = document.getElementById('rules');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -77,8 +74,9 @@ function drawSquareBall() {
 // Draw paddle on canvas
 function drawPaddle() {
   ctx.beginPath();
+  //ctx.ellipse(100, 100, 50, 75, 45 * Math.PI/180, 0, 2 * Math.PI);
   ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
-  ctx.fillStyle = '#0095dd';
+  ctx.fillStyle = '#1A2831';
   ctx.fill();
   ctx.closePath();
 }
@@ -258,13 +256,16 @@ function mouseUp(e) {
   }
 }
 
+// Touch controller
+
+function touchStart(e) {
+
+}
+
 // Keyboard and mouse  event handlers
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 document.getElementById("canvas").addEventListener('mousedown', mouseDown);
 document.getElementById("canvas").addEventListener('mousemove', mouseMove);
 document.getElementById("canvas").addEventListener('mouseup', mouseUp);
-
-// Rules and close event handlers
-rulesBtn.addEventListener('click', () => rules.classList.add('show'));
-closeBtn.addEventListener('click', () => rules.classList.remove('show'));
+document.getElementById("canvas").addEventListener('touchstart', touchStart);
