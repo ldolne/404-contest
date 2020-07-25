@@ -7,7 +7,7 @@ body {
   font-family: Arial, Helvetica, sans-serif; }
 
 header .boximg {
-  height: 220px;
+  height: 180px;
   width: 100%;
   background-image: url(../img/header.png);
   background-size: cover;
