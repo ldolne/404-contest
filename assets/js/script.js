@@ -43,7 +43,7 @@ const ball = {
     this.y += this.vy;
 
     // Wall collisions (right/left)
-    if (this.x + this.radius >= canvas.width || this.x - this.radius <= 0) {
+    if (this.x + this.radius >= canvas.width || this.x - (this.radius / 2) <= 0) {
       this.vx = -this.vx;
     }
 
@@ -94,7 +94,7 @@ const paddle = {
   w: 80,
   h: 30,
   speed: 8,
-  dx: 0,
+  vx: 0,
   drawPaddle: function() {
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.w, this.h);
@@ -103,7 +103,7 @@ const paddle = {
     ctx.fill();
   },
   movePaddle: function() {
-    this.x += this.dx;
+    this.x += this.vx;
 
     // Wall detection
     if (this.x + this.w > canvas.width) {
@@ -175,11 +175,11 @@ function clear() {
   if(ball.y < (codingZone.y * 3) && ball.y > (codingZone.y * 2))
   {
     ctx.fillStyle = "#E9D8B6";
-    ctx.fillRect(0, 0, canvas.width, canvas.height/3);
+    ctx.fillRect(0, 0, canvas.width, canvas.height / 3);
     ctx.fillStyle = "#E9C46A";
-    ctx.fillRect(0, (canvas.height - (2 * (canvas.height/3))), canvas.width, canvas.height/3);
+    ctx.fillRect(0, (canvas.height - (2 * (canvas.height / 3))), canvas.width, canvas.height / 3);
     ctx.fillStyle = 'rgba(255, 170, 102, 0.1)';
-    ctx.fillRect(0, (canvas.height - canvas.height/3), canvas.width, canvas.height/3);
+    ctx.fillRect(0, (canvas.height - canvas.height / 3), canvas.width, canvas.height / 3);
   }
   else
   {
@@ -218,8 +218,8 @@ function moveObjects()
 // Update canvas for animation
 function update() {
   clear();
-  draw();
   moveObjects();
+  draw();
 
   requestAnimationFrame(update);
 }
@@ -232,9 +232,9 @@ update();
 // Keyboard controllers
 function keyDown(e) {
   if (e.key === 'Right' || e.key === 'ArrowRight') {
-    paddle.dx = paddle.speed;
+    paddle.vx = paddle.speed;
   } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-    paddle.dx = -paddle.speed;
+    paddle.vx = -paddle.speed;
   }
 }
 
@@ -245,7 +245,7 @@ function keyUp(e) {
     e.key === 'Left' ||
     e.key === 'ArrowLeft'
   ) {
-    paddle.dx = 0;
+    paddle.vx = 0;
   }
 }
 
