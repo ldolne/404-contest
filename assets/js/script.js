@@ -1,42 +1,122 @@
+// Variables declaration and initialization
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-let score = 0;
 let message = 'ERROR-404';
-let isClickingDown = false;
 message = message.split("");
 message = message.map(String);
+let lettersCount = message.length;
+let isClickingDown = false;
 
-const lettersCount = message.length;
+// CANVAS OBJECTS CREATION
 
-// Create coding zones objects
+// Create coding zones object (properties)
 const codingZone = {
   x: canvas.width / 3,
   y: canvas.height / 3
 }
 
-// Create ball object
+// Create ball object (properties and canvas element)
 const ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
-  size: 10,
-  speed: 4,
-  dx: 4,
-  dy: -4
+  radius: 10,
+  vx: 2,
+  vy: -2,
+  color: 'blue',
+  drawRoundBall: function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  },
+  drawSquareBall: function() {
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, this.radius * 1.5, this.radius * 1.5);
+    ctx.closePath();
+    ctx.fillStyle = '#333333';
+    ctx.fill();
+  },
+  moveBall: function() {
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Wall collisions (right/left)
+    if (this.x + this.radius >= canvas.width || this.x - this.radius <= 0) {
+      this.vx = -this.vx;
+    }
+
+    // Wall collision (top/bottom)
+    if (this.y + this.radius >= canvas.height || this.y <= 0) {
+      this.vy = -this.vy;
+    }
+
+    // Paddle collisions (left, right, up)
+    if (
+      this.x - this.radius >= paddle.x &&
+      this.x + this.radius <= paddle.x + paddle.w &&
+      this.y + this.radius >= paddle.y
+    ) {
+      this.vy = -this.vy;
+    }
+
+    // Squares collisions
+    squares.forEach(square => {
+        if (square.visible) {
+          if (
+            this.x - this.radius >= square.x && // left square side check
+            this.x + this.radius <= square.x + square.w && // right square side check
+            this.y + this.radius >= square.y && // top square side check
+            this.y - this.radius <= square.y + square.h // bottom square side check
+          ) {
+            this.vy = -this.vy;
+            square.visible = false;
+
+            score.increaseScore();
+          }
+        }
+    });
+
+    // Hit bottom wall - Lose
+    if (this.y + this.radius > canvas.height) {
+      showAllSquares();
+      score.value = 0;
+    }
+  }
 };
 
-// Create paddle object
+// Create paddle object (properties and canvas element)
 const paddle = {
   x: canvas.width / 2 - 40,
   y: canvas.height - 40,
   w: 80,
   h: 30,
   speed: 8,
-  dx: 0
+  dx: 0,
+  drawPaddle: function() {
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, this.w, this.h);
+    ctx.closePath();
+    ctx.fillStyle = '#1A2831';
+    ctx.fill();
+  },
+  movePaddle: function() {
+    this.x += this.dx;
+
+    // Wall detection
+    if (this.x + this.w > canvas.width) {
+      this.x = canvas.width - this.w;
+    }
+
+    if (this.x < 0) {
+      this.x = 0;
+    }
+  }
 };
 
-// Create letter object
-const letterInfo = {
+// Create square object (properties, array of squares and canvas element)
+const square = {
   w: 30,
   h: 30,
   padding: 10,
@@ -45,180 +125,110 @@ const letterInfo = {
   visible: true
 };
 
-// Create letters
-const letters = [];
+const squares = [];
 for (let i = 0; i < lettersCount; i++) {
-  letters[i] = message[i];
-  const x = i * (letterInfo.w + letterInfo.padding) + letterInfo.offsetX;
-  const y = (letterInfo.h + letterInfo.padding) + letterInfo.offsetY;
-  letters[i] = { x, y, ...letterInfo };
+  squares[i] = message[i];
+  const x = i * (square.w + square.padding) + square.offsetX;
+  const y = (square.h + square.padding) + square.offsetY;
+  squares[i] = { x, y, ...square };
 }
 
-// Draw ball on canvas
-function drawBall(color) {
-  ctx.beginPath();
-  ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
-  ctx.fillStyle = color;
-  ctx.fill();
-  ctx.closePath();
-}
-
-function drawSquareBall() {
-  ctx.beginPath();
-  ctx.rect(ball.x, ball.y, ball.size * 1.5, ball.size * 1.5);
-  ctx.fillStyle = '#333333';
-  ctx.fill();
-  ctx.closePath();
-}
-
-// Draw paddle on canvas
-function drawPaddle() {
-  ctx.beginPath();
-  ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
-  ctx.fillStyle = '#1A2831';
-  ctx.fill();
-  ctx.closePath();
-}
-
-// Draw score on canvas
-function drawScore() {
-  ctx.fillStyle = '#1A2831';
-  ctx.font = '20px Arial';
-  ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
-}
-
-// Draw letters on canvas
-function drawLetters() {
-  letters.forEach((letter, i) => {
-      ctx.strokeStyle = letter.visible ? '#1A2831' : 'transparent';
-      ctx.strokeRect(letter.x, letter.y, letter.w, letter.h);
-      ctx.fillStyle = letter.visible ? '#1A2831' : 'transparent';
+function drawSquares() {
+  squares.forEach((square, i) => {
+      ctx.strokeStyle = square.visible ? '#1A2831' : 'transparent';
+      ctx.strokeRect(square.x, square.y, square.w, square.h);
+      ctx.fillStyle = square.visible ? '#1A2831' : 'transparent';
       ctx.font = "16px Helvetica";
-      ctx.fillText(message[i], letter.x + 9, letter.y + (letter.y/3));
+      ctx.fillText(message[i], square.x + 9, square.y + (square.y/3));
     });
 }
 
-// Move paddle on canvas
-function movePaddle() {
-  paddle.x += paddle.dx;
+// Create score object (properties and canvas element)
+const score = {
+  value: 0,
+  drawScore: function() {
+    ctx.fillStyle = '#1A2831';
+    ctx.font = '20px Helvetica';
+    ctx.fillText(`Score: ${this.value}`, canvas.width - 100, 30);
+  },
+  increaseScore: function() {
+    this.value++;
 
-  // Wall detection
-  if (paddle.x + paddle.w > canvas.width) {
-    paddle.x = canvas.width - paddle.w;
-  }
-
-  if (paddle.x < 0) {
-    paddle.x = 0;
+    if (this.value % lettersCount === 0) {
+      showAllSquares();
+    }
   }
 }
 
-// Move ball on canvas
-function moveBall() {
-  ball.x += ball.dx;
-  ball.y += ball.dy;
+// FUNCTIONALITIES
 
-  // Wall collision (right/left)
-  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
-    ball.dx *= -1; // ball.dx = ball.dx * -1
-  }
+// Make all squares reappear when game over
+function showAllSquares() {
+  squares.forEach(square => {
+    square.visible = true;
+    });
+}
 
-  // Wall collision (top/bottom)
-  if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
-    ball.dy *= -1;
-  }
-
-  // Paddle collision
-  if (
-    ball.x - ball.size > paddle.x &&
-    ball.x + ball.size < paddle.x + paddle.w &&
-    ball.y + ball.size > paddle.y
-  ) {
-    ball.dy = -ball.speed;
-  }
-
-  // Letter collision
-  letters.forEach(letter => {
-      if (letter.visible) {
-        if (
-          ball.x - ball.size > letter.x && // left letter side check
-          ball.x + ball.size < letter.x + letter.w && // right letter side check
-          ball.y + ball.size > letter.y && // top letter side check
-          ball.y - ball.size < letter.y + letter.h // bottom letter side check
-        ) {
-          ball.dy *= -1;
-          letter.visible = false;
-
-          increaseScore();
-        }
-      }
-  });
-
-  // Hit bottom wall - Lose
-  if (ball.y + ball.size > canvas.height) {
-    showAllLetters();
-    score = 0;
-  }
-
-  // Change coding zone
-  if(ball.y < (codingZone.y * 2) && ball.y > codingZone.y)
-  {
-    drawBall('#F45661');
-  }
-
+// Clear the canvas
+function clear() {
   if(ball.y < (codingZone.y * 3) && ball.y > (codingZone.y * 2))
   {
-    drawBall('#E6E6E6');
+    ctx.fillStyle = "#E9D8B6";
+    ctx.fillRect(0, 0, canvas.width, canvas.height/3);
+    ctx.fillStyle = "#E9C46A";
+    ctx.fillRect(0, (canvas.height - (2 * (canvas.height/3))), canvas.width, canvas.height/3);
+    ctx.fillStyle = 'rgba(255, 170, 102, 0.1)';
+    ctx.fillRect(0, (canvas.height - canvas.height/3), canvas.width, canvas.height/3);
   }
-}
-
-// Increase score
-function increaseScore() {
-  score++;
-
-  if (score % lettersCount === 0) {
-    showAllLetters();
+  else
+  {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
-}
-
-// Make all letters appear
-function showAllLetters() {
-  letters.forEach(letter => (letter.visible = true
-    ));
 }
 
 // Draw everything
 function draw() {
-  // clear canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  // Change coding zone
   if(ball.y < codingZone.y)
   {
-    drawSquareBall();
-  }
-  else
+    ball.drawSquareBall();
+  } else if(ball.y < (codingZone.y * 2) && ball.y > codingZone.y)
   {
-    drawBall();
+    ball.color = '#F45661';
+    ball.drawRoundBall();
+  }else if(ball.y < (codingZone.y * 3) && ball.y > (codingZone.y * 2))
+  {
+    ball.color = '#E6E6E6';
+    ball.drawRoundBall();
   }
 
-  drawPaddle();
-  drawScore();
-  drawLetters();
+  paddle.drawPaddle();
+  score.drawScore();
+  drawSquares();
 }
 
-// Update canvas drawing and animation
-function update() {
-  movePaddle();
-  moveBall();
+function moveObjects()
+{
+  ball.moveBall();
+  paddle.movePaddle();
+}
 
-  // Draw everything
+// Update canvas for animation
+function update() {
+  clear();
   draw();
+  moveObjects();
 
   requestAnimationFrame(update);
 }
 
+// Update canvas
 update();
 
-// Keydown event
+// CONTROLLERS
+
+// Keyboard controllers
 function keyDown(e) {
   if (e.key === 'Right' || e.key === 'ArrowRight') {
     paddle.dx = paddle.speed;
@@ -227,7 +237,6 @@ function keyDown(e) {
   }
 }
 
-// Keyup event
 function keyUp(e) {
   if (
     e.key === 'Right' ||
@@ -239,7 +248,7 @@ function keyUp(e) {
   }
 }
 
-// Mouse controller
+// Mouse controllers
 function mouseDown(e) {
   isClickingDown = true;
 }
@@ -256,9 +265,8 @@ function mouseUp(e) {
   }
 }
 
-// Touch controller
+// Touch/Tactile controllers
 function touchStart(e) {
-  console.log("Hello");
   isClickingDown = true;
 }
 
@@ -274,7 +282,7 @@ function touchEnd(e) {
   }
 }
 
-// Keyboard and mouse  event handlers
+// Controllers event handlers
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 document.getElementById("canvas").addEventListener('mousedown', mouseDown);
