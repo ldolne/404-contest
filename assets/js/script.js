@@ -283,11 +283,11 @@ function touchEnd(e) {
 }
 
 // Controllers event handlers
-document.addEventListener('keydown', keyDown);
+document.addEventListener('keydown', keyDown, {passive: true});
 document.addEventListener('keyup', keyUp);
-document.getElementById("canvas").addEventListener('mousedown', mouseDown);
-document.getElementById("canvas").addEventListener('mousemove', mouseMove);
-document.getElementById("canvas").addEventListener('mouseup', mouseUp);
-document.getElementById("canvas").addEventListener('touchstart', touchStart);
-document.getElementById("canvas").addEventListener('touchmove', touchMove);
-document.getElementById("canvas").addEventListener('touchend', touchEnd);
+document.getElementById("canvas").addEventListener('mousedown', mouseDown, {passive: true});
+document.getElementById("canvas").addEventListener('mousemove', mouseMove, {passive: true});
+document.getElementById("canvas").addEventListener('mouseup', mouseUp, {passive: true});
+document.getElementById("canvas").addEventListener('touchstart', touchStart, {passive: true});
+document.getElementById("canvas").addEventListener('touchmove', touchMove, {passive: true});
+document.getElementById("canvas").addEventListener('touchend', touchEnd, {passive: true});
