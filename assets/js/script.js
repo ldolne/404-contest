@@ -242,6 +242,7 @@ function keyUp(e) {
   }
 }
 
+// Mouse controller
 function mouseDown(e) {
   isClickingDown = true;
 }
