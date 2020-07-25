@@ -1,0 +1,17 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: #1A2831; }
+
+header .boximg {
+  height: 220px;
+  width: 100%;
+  background-image: url(../img/header.png);
+  background-size: cover;
+  background-position: center; }
+
+.container {
+  height: 600px;
+  background-image: url(../img/background.svg);
+  display: flex;
+  justify-content: center; }
