@@ -83,7 +83,8 @@ header .boximg {
     margin-right: 20px; }
     .changeLanguage li a {
       text-decoration: none;
-      color: white; }
+      color: white;
+      font-family: "mywriting"; }
 
 @media screen and (max-width: 960px) {
   .canvasbox {
