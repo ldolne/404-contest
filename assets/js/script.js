@@ -56,7 +56,8 @@ const ball = {
     if (
       this.x - this.radius >= paddle.x &&
       this.x + this.radius <= paddle.x + paddle.w &&
-      this.y + this.radius >= paddle.y
+      this.y + this.radius >= paddle.y &&
+      this.y - this.radius <= paddle.y + paddle.h 
     ) {
       this.vy = -this.vy;
     }
@@ -89,7 +90,7 @@ const ball = {
 // Create paddle object (properties and canvas element)
 const paddle = {
   x: canvas.width / 2 - 40,
-  y: canvas.height - 40,
+  y: canvas.height - 50,
   w: 80,
   h: 30,
   speed: 8,
