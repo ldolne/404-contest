@@ -13,6 +13,7 @@ header{
         background-position: center;
     }
 }
+<<<<<<< HEAD
 @media screen and (max-width: 899px){
     .canvasbox{
         background-position: center;
@@ -20,6 +21,31 @@ header{
             display: none;
             
         }
+=======
+.canvasbox{
+    background-image: url(../img/background.svg);
+    background-position: center;
+}
+.logo{
+    width: 100px;
+    min-width: 100px;
+    height: 600px;
+    background-image: url(../img/background.svg);
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+    div{
+        height: 200px;
+        padding-top: 10px;
+        padding-left: 3px;
+    }
+}
+@media screen and (max-width: 899px){
+    .canvasbox{
+        background-position: center;
+        
+>>>>>>> michael
     }
     header{
         display: none;
@@ -40,15 +66,23 @@ header{
             width: 0;
         }
         .canvasbox{
+<<<<<<< HEAD
             background-image: url(../img/background.svg);
+=======
+            
+>>>>>>> michael
             width: 360px;
             min-width: 360px;
             display: flex;
             justify-content: flex-end;
+<<<<<<< HEAD
             canvas{
                 border-left: 10px solid white;
                 
             }
+=======
+            
+>>>>>>> michael
         
         }
         .info2{
@@ -59,10 +93,17 @@ header{
     }
   }
 
+<<<<<<< HEAD
 
 @media screen and (min-width: 1380px) {
  
 
+=======
+
+@media screen and (min-width: 1380px) {
+ 
+
+>>>>>>> michael
     .container{
         height: 600px;
         width: 100%;
@@ -85,13 +126,21 @@ header{
             background-image: "";
         }
         .canvasbox{
+<<<<<<< HEAD
             background-image: url(../img/background.svg);
             background-position: center;
+=======
+            
+>>>>>>> michael
             width: 360px;
             min-width: 360px;
             display: flex;
             justify-content: flex-end;
+<<<<<<< HEAD
             border-left: 5px solid white;
+=======
+            
+>>>>>>> michael
             
         
         }
@@ -110,12 +159,16 @@ header{
             background-image: "";
         }
          
+<<<<<<< HEAD
         .logo{
             width: 100px;
             height: 600px;
             background-image: url(../img/background.svg);
             background-position: center;
         }
+=======
+        
+>>>>>>> michael
     }
 }
 

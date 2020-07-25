@@ -10,11 +10,35 @@ header .boximg {
   background-size: cover;
   background-position: center; }
 
+<<<<<<< HEAD
 @media screen and (max-width: 899px) {
   .canvasbox {
     background-position: center; }
     .canvasbox canvas {
       display: none; }
+=======
+.canvasbox {
+  background-image: url(../img/background.svg);
+  background-position: center; }
+
+.logo {
+  width: 100px;
+  min-width: 100px;
+  height: 600px;
+  background-image: url(../img/background.svg);
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px; }
+  .logo div {
+    height: 200px;
+    padding-top: 10px;
+    padding-left: 3px; }
+
+@media screen and (max-width: 899px) {
+  .canvasbox {
+    background-position: center; }
+>>>>>>> michael
   header {
     display: none; } }
 
@@ -29,13 +53,19 @@ header .boximg {
     .container .info1 {
       width: 0; }
     .container .canvasbox {
+<<<<<<< HEAD
       background-image: url(../img/background.svg);
+=======
+>>>>>>> michael
       width: 360px;
       min-width: 360px;
       display: flex;
       justify-content: flex-end; }
+<<<<<<< HEAD
       .container .canvasbox canvas {
         border-left: 10px solid white; }
+=======
+>>>>>>> michael
     .container .info2 {
       width: 0; } }
 
@@ -57,6 +87,7 @@ header .boximg {
     .container .nl-info-L {
       background-image: ""; }
     .container .canvasbox {
+<<<<<<< HEAD
       background-image: url(../img/background.svg);
       background-position: center;
       width: 360px;
@@ -64,6 +95,12 @@ header .boximg {
       display: flex;
       justify-content: flex-end;
       border-left: 5px solid white; }
+=======
+      width: 360px;
+      min-width: 360px;
+      display: flex;
+      justify-content: flex-end; }
+>>>>>>> michael
     .container .info2 {
       height: 600px;
       width: 250px; }
@@ -72,9 +109,13 @@ header .boximg {
     .container .nl-info-R {
       background-image: ""; }
     .container .en-info-R {
+<<<<<<< HEAD
       background-image: ""; }
     .container .logo {
       width: 100px;
       height: 600px;
       background-image: url(../img/background.svg);
       background-position: center; } }
+=======
+      background-image: ""; } }
+>>>>>>> michael
