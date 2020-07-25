@@ -1,0 +1,34 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: #1A2831; }
+
+header .boximg {
+  height: 220px;
+  width: 100%;
+  background-image: url(../img/header.png);
+  background-size: cover;
+  background-position: center; }
+
+.container {
+  height: 600px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center; }
+  .container .info1 {
+    height: 600px;
+    width: 250px;
+    background-image: url(../img/test404-LEFT.svg); }
+  .container .canvasbox {
+    background-image: url(../img/background.svg);
+    width: 900px;
+    display: flex;
+    justify-content: flex-end; }
+    .container .canvasbox canvas {
+      border-left: 10px solid white; }
+  .container .info2 {
+    height: 600px;
+    width: 250px;
+    background-image: url(../img/test404-RIGHT.svg); }
