@@ -264,7 +264,7 @@ function touchStart(e) {
 
 function touchMove(e) {
   if(isClickingDown) {
-    paddle.x = (e.touches[0].clientX - paddle.w);
+    paddle.x = (e.touches[0].clientX - (paddle.w + paddle.w/2));
   }
 }
 
