@@ -13,7 +13,19 @@ header{
         background-position: center;
     }
 }
-
+@media screen and (max-width: 899px){
+    .canvasbox{
+        background-position: center;
+        canvas{
+            display: none;
+            
+        }
+    }
+    header{
+        display: none;
+    }
+    
+}
 
 @media screen and (max-width: 1379px) {
     .container{
@@ -29,8 +41,8 @@ header{
         }
         .canvasbox{
             background-image: url(../img/background.svg);
-            width: 900px;
-            min-width: 900px;
+            width: 360px;
+            min-width: 360px;
             display: flex;
             justify-content: flex-end;
             canvas{
@@ -62,27 +74,48 @@ header{
         .info1{
             height: 600px;
             width: 250px;
-            background-image: url(../img/test404-LEFT.svg);
+        }
+        .fr-info-L{
+            background-image: url(../img/test404-LEFT-FR.svg);
+        }
+        .nl-info-L{
+            background-image: "";
+        }
+        .nl-info-L{
+            background-image: "";
         }
         .canvasbox{
             background-image: url(../img/background.svg);
-            width: 900px;
-            min-width: 900px;
+            background-position: center;
+            width: 360px;
+            min-width: 360px;
             display: flex;
             justify-content: flex-end;
-            canvas{
-                border-left: 10px solid white;
-                
-            }
+            border-left: 5px solid white;
+            
         
         }
         .info2{
             height: 600px;
             width: 250px;
-            background-image: url(../img/test404-RIGHT.svg);
+            
+        }
+        .fr-info-R{
+            background-image: url(../img/test404-RIGHT-FR.svg);
+        }
+        .nl-info-R{
+            background-image: "";
+        }
+        .en-info-R{
+            background-image: "";
         }
          
-    
+        .logo{
+            width: 100px;
+            height: 600px;
+            background-image: url(../img/background.svg);
+            background-position: center;
+        }
     }
 }
 
