@@ -5,7 +5,8 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 let score = 0;
-let message = 'ERROR-404-PAGE-NOT-FOUND';
+let message = 'ERROR-404';
+let isClickingDown = false;
 message = message.split("");
 message = message.map(String);
 console.log(message);
@@ -40,20 +41,11 @@ const paddle = {
 
 // Create letter object
 const letterInfo = {
-  w: 25,
-  h: 20,
+  w: 30,
+  h: 30,
   padding: 10,
-  offsetX: 45,
-  offsetY: 60,
-  visible: true
-};
-
-const squareInfo = {
-  w: 25,
-  h: 25,
-  padding: 10,
-  offsetX: 45,
-  offsetY: 60,
+  offsetX: 5,
+  offsetY: 20,
   visible: true
 };
 
@@ -64,13 +56,6 @@ for (let i = 0; i < lettersCount; i++) {
   const x = i * (letterInfo.w + letterInfo.padding) + letterInfo.offsetX;
   const y = (letterInfo.h + letterInfo.padding) + letterInfo.offsetY;
   letters[i] = { x, y, ...letterInfo };
-}
-
-const squares = [];
-for (let i = 0; i < lettersCount; i++) {
-  const x = i * (squareInfo.w + squareInfo.padding) + squareInfo.offsetX;
-  const y = (squareInfo.h + squareInfo.padding) + squareInfo.offsetY;
-  squares[i] = { x, y, ...squareInfo };
 }
 
 // Draw ball on canvas
@@ -108,22 +93,11 @@ function drawScore() {
 // Draw letters on canvas
 function drawLetters() {
   letters.forEach((letter, i) => {
-      ctx.font = `${letterInfo.w}px Helvetica`;
-      ctx.fillText(message[i], letter.x, letter.y);
+      ctx.strokeStyle = letter.visible ? 'white' : 'transparent';
+      ctx.strokeRect(letter.x, letter.y, letter.w, letter.h);
       ctx.fillStyle = letter.visible ? '#0095dd' : 'transparent';
-      ctx.strokeStyle = "#FF0000";
-      ctx.fill();
-    });
-}
-
-// Draw square on canvas
-function drawSquares() {
-  squares.forEach((square) => {
-      ctx.beginPath();
-      ctx.rect(square.x, square.y, square.w, square.h);
-      ctx.strokeStyle = square.visible ? '#0095dd' : 'transparent';
-      ctx.stroke();
-      ctx.closePath();
+      ctx.font = "16px Helvetica";
+      ctx.fillText(message[i], letter.x + 9, letter.y + (letter.y/3));
     });
 }
 
@@ -155,8 +129,6 @@ function moveBall() {
   if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
     ball.dy *= -1;
   }
-
-  // console.log(ball.x, ball.y);
 
   // Paddle collision
   if (
@@ -234,7 +206,6 @@ function draw() {
   drawPaddle();
   drawScore();
   drawLetters();
-  drawSquares();
 }
 
 // Update canvas drawing and animation
@@ -271,9 +242,29 @@ function keyUp(e) {
   }
 }
 
-// Keyboard event handlers
+// Mouse controller
+function mouseDown(e) {
+  isClickingDown = true;
+}
+
+function mouseMove(e) {
+  if(isClickingDown) {
+    paddle.x = (e.offsetX - paddle.w/2);
+  }
+}
+
+function mouseUp(e) {
+  if (isClickingDown) {
+    isClickingDown = false;
+  }
+}
+
+// Keyboard and mouse  event handlers
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
+document.getElementById("canvas").addEventListener('mousedown', mouseDown);
+document.getElementById("canvas").addEventListener('mousemove', mouseMove);
+document.getElementById("canvas").addEventListener('mouseup', mouseUp);
 
 // Rules and close event handlers
 rulesBtn.addEventListener('click', () => rules.classList.add('show'));
