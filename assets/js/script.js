@@ -9,7 +9,6 @@ let message = 'ERROR-404';
 let isClickingDown = false;
 message = message.split("");
 message = message.map(String);
-console.log(message);
 
 const lettersCount = message.length;
 
@@ -70,7 +69,7 @@ function drawBall(color) {
 function drawSquareBall() {
   ctx.beginPath();
   ctx.rect(ball.x, ball.y, ball.size * 1.5, ball.size * 1.5);
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = '#333333';
   ctx.fill();
   ctx.closePath();
 }
@@ -165,12 +164,12 @@ function moveBall() {
   // Change coding zone
   if(ball.y < (codingZone.y * 2) && ball.y > codingZone.y)
   {
-    drawBall('orange');
+    drawBall('#F45661');
   }
 
   if(ball.y < (codingZone.y * 3) && ball.y > (codingZone.y * 2))
   {
-    drawBall('green');
+    drawBall('#E6E6E6');
   }
 }
 
