@@ -74,15 +74,16 @@ header .boximg {
 .en-info-R {
   background-image: url(../img/test404-RIGHT-EN.svg); }
 
-.changeLanguage {
+.credits {
   width: 100%;
   padding: 0;
   display: flex;
   list-style: none;
-  justify-content: center; }
-  .changeLanguage li {
+  justify-content: center;
+  color: white; }
+  .credits li {
     margin-right: 20px; }
-    .changeLanguage li a {
+    .credits li a {
       text-decoration: none;
       color: white;
       font-family: "mywriting"; }
